@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tous les inputs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form>
+        <!-- Champs de texte -->
+        <label for="text">Nom :</label>
+        <input type="text" id="text" name="text" placeholder="Nom">
+
+        <label for="text">Prénom :</label>
+        <input type="text" id="text" name="text" placeholder="Prénom">
+
+        <!-- Mot de passe avec bouton œil -->
+        <div class="password-container">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" placeholder="Mot de passe">
+            <span class="toggle-password" onclick="togglePassword()">👁️</span>
+        </div>
+
+        <!-- Indicateur de force du mot de passe -->
+        <label for="password-strength">Force du mot de passe :</label>
+        <input type="password" id="password-strength" name="password-strength" oninput="checkPasswordStrength(this.value)">
+        <div class="strength-meter">
+            <div id="strength-bar"></div>
+        </div>
+
+        <!-- Autres types d'input -->
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" placeholder="Email">
+
+        <label for="tel">Téléphone :</label>
+        <input type="tel" id="tel" name="tel" placeholder="Téléphone">
+
+        <label for="url">URL :</label>
+        <input type="url" id="url" name="url" placeholder="https://exemple.com">
+
+        <label for="number">Nombre :</label>
+        <input type="number" id="number" name="number" min="0" max="100" step="1" value="50">
+
+        <label for="range">Range :</label>
+        <input type="range" id="range" name="range" min="0" max="100" value="50" oninput="document.getElementById('rangeValue').textContent = this.value">
+        <span id="rangeValue" class="range-output">50</span>
+
+        <label for="date">Date :</label>
+        <input type="date" id="date" name="date">
+
+        <label for="time">Heure :</label>
+        <input type="time" id="time" name="time">
+
+        <label for="datetime">Date et Heure :</label>
+        <input type="datetime-local" id="datetime" name="datetime">
+
+        <label for="month">Mois :</label>
+        <input type="month" id="month" name="month">
+
+        <label for="week">Semaine :</label>
+        <input type="week" id="week" name="week">
+
+        <label for="color">Couleur :</label>
+        <input type="color" id="color" name="color" value="#ff0000">
+
+        <label for="search">Recherche :</label>
+        <input type="search" id="search" name="search" placeholder="Rechercher">
+
+        <label for="file">Fichier :</label>
+        <input type="file" id="file" name="file">
+
+        <label for="checkbox">Case à cocher :</label>
+        <input type="checkbox" id="checkbox" name="checkbox"> Cochez-moi
+
+        <label for="radio1">Bouton radio :</label>
+        <input type="radio" id="radio1" name="radio" value="option1"> Option 1
+        <input type="radio" id="radio2" name="radio" value="option2"> Option 2
+
+        <label for="textarea">Commentaires :</label>
+        <textarea id="textarea" name="textarea" rows="5" placeholder="Écrivez ici"></textarea>
+
+        <!-- Boutons -->
+        <input type="submit" value="Envoyer">
+        <input type="reset" value="Réinitialiser">
+    </form>
+
+    <script>
+        // Fonction pour afficher ou masquer le mot de passe
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        }
+
+        // Fonction pour vérifier la force du mot de passe
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strength-bar');
+            let strength = 0;
+
+            if (password.length > 5) strength += 20;
+            if (password.match(/[a-z]+/)) strength += 20;
+            if (password.match(/[A-Z]+/)) strength += 20;
+            if (password.match(/[0-9]+/)) strength += 20;
+            if (password.match(/[\W]+/)) strength += 20;
+
+            strengthBar.style.width = strength + '%';
+            strengthBar.style.backgroundColor = strength === 100 ? 'green' : 'red';
+        }
+    </script>
+
+</body>
+
+</html>
+
+
+
